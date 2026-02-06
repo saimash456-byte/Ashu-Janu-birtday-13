@@ -8,8 +8,8 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-  font-family: 'Georgia', serif;
-  background: radial-gradient(circle at top,#2b1055,#000);
+  font-family:'Georgia',serif;
+  background:radial-gradient(circle at top,#ffb3c6,#590d22,#000);
   color:white;
   overflow:hidden;
 }
@@ -23,20 +23,22 @@ body{
   align-items:center;
   flex-direction:column;
   text-align:center;
+  padding:20px;
 }
 .active{display:flex;}
 
 /* COMMON */
-.text{font-size:20px;opacity:.9;margin-top:15px;}
+.text{font-size:22px;opacity:.9;margin-top:15px;}
 button{
-  padding:12px 28px;
+  padding:12px 30px;
   border:none;
   border-radius:30px;
   font-size:18px;
   background:white;
   color:#c9184a;
-  margin-top:20px;
+  margin:15px;
   cursor:pointer;
+  box-shadow:0 5px 15px rgba(0,0,0,.3);
 }
 
 /* HOUSE & DOOR */
@@ -53,14 +55,14 @@ button{
   font-size:70px;
   position:absolute;
   left:-120px;
-  bottom:20%;
+  bottom:25%;
   animation:drive 6s forwards;
 }
-@keyframes drive{to{left:40%;}}
+@keyframes drive{to{left:45%;}}
 
 /* ENVELOPE */
 .envelope{
-  font-size:60px;
+  font-size:70px;
   animation:float 2s infinite;
 }
 @keyframes float{
@@ -68,27 +70,15 @@ button{
   50%{transform:translateY(-12px)}
 }
 
-/* PEN */
-.pen{
-  font-size:60px;
-  animation:penin 1.5s forwards;
-}
-@keyframes penin{
-  from{transform:translateX(200px);opacity:0}
-  to{transform:translateX(0);opacity:1}
-}
-
 /* LETTER */
 .letter{
-  background:#fff8f0;
+  background:#fff1f2;
   color:#3a0f1c;
-  border-radius:18px;
+  border-radius:20px;
   padding:25px;
   max-width:650px;
-  margin:auto;
-  box-shadow:0 20px 40px rgba(0,0,0,.4);
+  box-shadow:0 25px 50px rgba(0,0,0,.4);
   position:relative;
-  z-index:2;
 }
 .top{
   font-size:26px;
@@ -103,11 +93,11 @@ button{
   top:-40px;
   animation:fall linear infinite;
 }
-.rose{font-size:24px;}
-.heart{font-size:20px;color:#ff4d6d;}
+.rose{font-size:26px;}
+.heart{font-size:22px;color:#ff4d6d;}
 @keyframes fall{to{top:120%;}}
 
-/* CANVAS */
+/* SIGN */
 canvas{
   border:2px dashed #c9184a;
   border-radius:12px;
@@ -118,48 +108,47 @@ canvas{
 
 <body>
 
-<!-- SCENE 1 : POSTMAN -->
+<!-- SCENE 1 -->
 <div class="scene active" id="s1">
   <div class="house">🏠</div>
   <div class="postman">🚗📮</div>
-  <div class="text">Someone is coming…</div>
+  <div class="text">Someone is coming with something special…</div>
 </div>
 
-<!-- SCENE 2 : DOOR -->
+<!-- SCENE 2 -->
 <div class="scene" id="s2">
   <div class="house">🏠</div>
   <div class="door" id="door">🚪</div>
-  <div class="text">Knock… Knock…</div>
+  <div class="text">Knock… Knock… 💖</div>
   <button onclick="openDoor()">Open Door</button>
 </div>
 
-<!-- SCENE 3 : ENVELOPE -->
+<!-- SCENE 3 -->
 <div class="scene" id="s3">
   <div class="envelope">💌</div>
   <div class="text">
-    This letter is only for you…<br>
-    from someone who waits every day 💖
+    A letter wrapped in love…<br>
+    only for Ashu Janu 🤍
   </div>
-  <button onclick="next(4)">Take the letter</button>
+  <button onclick="next(4)">Take Letter</button>
 </div>
 
-<!-- SCENE 4 : SIGN -->
+<!-- SCENE 4 SIGN -->
 <div class="scene" id="s4">
-  <div class="pen">✒️</div>
-  <p>Sign with your heart…</p>
+  <p>Sign it with your heart ✍️</p>
   <canvas id="sign" width="280" height="150"></canvas>
   <button onclick="next(5)">Done</button>
 </div>
 
-<!-- SCENE 5 : OPEN ? -->
+<!-- SCENE 5 OPEN OPTION -->
 <div class="scene" id="s5">
-  <p>Do you want to open this letter? 💭</p>
-  <button onclick="cry()">No 😔</button>
-  <button onclick="openLetter()">Yes ❤️</button>
-  <div id="react" style="font-size:40px;"></div>
+  <h2>Do you want to open the letter? 💭</h2>
+  <button onclick="sad()">No 😢</button>
+  <button onclick="happy()">Yes ❤️</button>
+  <div id="reaction" style="font-size:50px;margin-top:20px;"></div>
 </div>
 
-<!-- SCENE 6 : LETTER PART 1 -->
+<!-- SCENE 6 LETTER PART 1 -->
 <div class="scene" id="s6">
   <div class="letter">
     <div class="top">✨ 12 DAYS LEFT ✨</div>
@@ -174,30 +163,21 @@ canvas{
       Tumhari ek jhalak mere dil ko sakoon de deti hai,<br>
       aur tumhein dekhe baghair mera dil bechain rehta hai 🫀<br><br>
 
-      Tum muskurati ho to lagta hai waqt tham sa gaya ho,<br>
-      aur jab udaas hoti ho, to meri duniya bhi khamosh ho jati hai 🌧️
+      Tum muskurati ho to lagta hai waqt tham sa gaya ho…
     </p>
   </div>
-  <button onclick="next(7)">Read more ❤️</button>
+  <button onclick="next(7)">Read More ❤️</button>
 </div>
 
-<!-- SCENE 7 : LETTER PART 2 -->
+<!-- SCENE 7 LETTER PART 2 -->
 <div class="scene" id="s7">
   <div class="letter">
     <p>
-      Tum ho to har din khoobsurat lagta hai,<br>
-      tum na ho to har pal intezar ban jata hai ⏳<br><br>
-
-      Tum meri rahat bhi ho aur meri aadat bhi,<br>
-      tumhari zaroorat mujhe har saans ke saath mehsoos hoti hai 🤍<br><br>
-
-      Tum meri kahani ka sabse khoobsurat hissa ho,<br>
-      aur meri har kahani tum se hi shuru hoti hai 📖<br><br>
-
+      Tum meri rahat bhi ho aur meri aadat bhi 🤍<br><br>
+      Tum meri kahani ka sabse khoobsurat hissa ho 📖<br><br>
       Tum ho to main hoon,<br>
       tum na ho to main sirf ek khali sa ehsaas hoon…
     </p>
-
     <h3>Happy Birthday meri pyari Ashu Janu 🎉💖</h3>
   </div>
 </div>
@@ -208,31 +188,27 @@ function next(n){
   scenes.forEach(s=>s.classList.remove('active'));
   document.getElementById('s'+n).classList.add('active');
 }
+setTimeout(()=>next(2),6000);
 
-/* AUTO */
-setTimeout(()=>next(2),6500);
-
-/* DOOR */
 function openDoor(){
-  document.getElementById("door").classList.add("open");
+  door.classList.add('open');
   setTimeout(()=>next(3),900);
 }
 
-/* REACTIONS */
-function cry(){
-  document.getElementById("react").innerHTML="😢";
+function sad(){
+  reaction.innerHTML="😢💔";
 }
-function openLetter(){
-  document.getElementById("react").innerHTML="😊";
+
+function happy(){
+  reaction.innerHTML="😊❤️";
   setTimeout(()=>{
     next(6);
     roses(); hearts();
-  },800);
+  },900);
 }
 
-/* EFFECTS */
 function roses(){
-  for(let i=0;i<20;i++){
+  for(let i=0;i<18;i++){
     let r=document.createElement('div');
     r.className='rose';
     r.innerText='🌹';
@@ -265,13 +241,6 @@ canvas.onmousemove=e=>{
   ctx.arc(e.offsetX,e.offsetY,2,0,Math.PI*2);
   ctx.fill();
 };
-canvas.addEventListener("touchmove",e=>{
-  e.preventDefault();
-  let r=canvas.getBoundingClientRect();
-  ctx.beginPath();
-  ctx.arc(e.touches[0].clientX-r.left,e.touches[0].clientY-r.top,2,0,Math.PI*2);
-  ctx.fill();
-});
 </script>
 
 </body>
