@@ -3,134 +3,275 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Letter For Ashu 💌</title>
+<title>12 Days Left – For Ashu 💖</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family: 'Georgia', serif;
-  background: linear-gradient(#0f2027,#203a43,#2c5364);
-  overflow:hidden;
+  background: radial-gradient(circle at top,#2b1055,#000);
   color:white;
+  overflow:hidden;
 }
 
 /* SCENES */
 .scene{
   position:absolute;
-  width:100%;
-  height:100vh;
+  inset:0;
   display:none;
   justify-content:center;
   align-items:center;
   flex-direction:column;
+  text-align:center;
 }
 .active{display:flex;}
 
-/* HOUSE */
-.house{
-  font-size:120px;
-  margin-bottom:10px;
+/* COMMON */
+.text{font-size:20px;opacity:.9;margin-top:15px;}
+button{
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  background:white;
+  color:#c9184a;
+  margin-top:20px;
+  cursor:pointer;
 }
 
-/* DOOR */
+/* HOUSE & DOOR */
+.house{font-size:120px;}
 .door{
   font-size:90px;
   cursor:pointer;
   transition:transform 1s;
 }
-.open{
-  transform:rotateY(-60deg);
-}
+.door.open{transform:rotateY(-65deg);}
 
 /* POSTMAN */
 .postman{
   font-size:70px;
   position:absolute;
-  left:-100px;
+  left:-120px;
   bottom:20%;
-  animation:drive 5s forwards;
+  animation:drive 6s forwards;
 }
-@keyframes drive{
-  to{left:40%;}
-}
+@keyframes drive{to{left:40%;}}
 
 /* ENVELOPE */
 .envelope{
   font-size:60px;
-  margin-top:20px;
   animation:float 2s infinite;
 }
 @keyframes float{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
+  50%{transform:translateY(-12px)}
 }
 
-/* TEXT */
-.text{
-  margin-top:15px;
-  font-size:20px;
-  opacity:0.9;
+/* PEN */
+.pen{
+  font-size:60px;
+  animation:penin 1.5s forwards;
+}
+@keyframes penin{
+  from{transform:translateX(200px);opacity:0}
+  to{transform:translateX(0);opacity:1}
 }
 
-/* BUTTON */
-button{
-  margin-top:20px;
-  padding:12px 28px;
-  border:none;
-  border-radius:30px;
-  background:#fff;
+/* LETTER */
+.letter{
+  background:#fff8f0;
+  color:#3a0f1c;
+  border-radius:18px;
+  padding:25px;
+  max-width:650px;
+  margin:auto;
+  box-shadow:0 20px 40px rgba(0,0,0,.4);
+  position:relative;
+  z-index:2;
+}
+.top{
+  font-size:26px;
+  font-weight:bold;
   color:#c9184a;
-  font-size:18px;
-  cursor:pointer;
+  margin-bottom:10px;
+}
+
+/* ROSES & HEARTS */
+.rose,.heart{
+  position:absolute;
+  top:-40px;
+  animation:fall linear infinite;
+}
+.rose{font-size:24px;}
+.heart{font-size:20px;color:#ff4d6d;}
+@keyframes fall{to{top:120%;}}
+
+/* CANVAS */
+canvas{
+  border:2px dashed #c9184a;
+  border-radius:12px;
+  background:white;
 }
 </style>
 </head>
 
 <body>
 
-<!-- SCENE 1 : POSTMAN ARRIVES -->
-<div class="scene active" id="scene1">
+<!-- SCENE 1 : POSTMAN -->
+<div class="scene active" id="s1">
   <div class="house">🏠</div>
   <div class="postman">🚗📮</div>
   <div class="text">Someone is coming…</div>
 </div>
 
-<!-- SCENE 2 : DOOR KNOCK -->
-<div class="scene" id="scene2">
+<!-- SCENE 2 : DOOR -->
+<div class="scene" id="s2">
   <div class="house">🏠</div>
   <div class="door" id="door">🚪</div>
   <div class="text">Knock… Knock…</div>
   <button onclick="openDoor()">Open Door</button>
 </div>
 
-<!-- SCENE 3 : LETTER HANDOVER -->
-<div class="scene" id="scene3">
-  <div class="house">🏠</div>
+<!-- SCENE 3 : ENVELOPE -->
+<div class="scene" id="s3">
   <div class="envelope">💌</div>
   <div class="text">
     This letter is only for you…<br>
-    From someone who waits every day 💖
+    from someone who waits every day 💖
   </div>
-  <button onclick="alert('Next phase: Sign & Letter opening 💕')">
-    Take the letter
-  </button>
+  <button onclick="next(4)">Take the letter</button>
+</div>
+
+<!-- SCENE 4 : SIGN -->
+<div class="scene" id="s4">
+  <div class="pen">✒️</div>
+  <p>Sign with your heart…</p>
+  <canvas id="sign" width="280" height="150"></canvas>
+  <button onclick="next(5)">Done</button>
+</div>
+
+<!-- SCENE 5 : OPEN ? -->
+<div class="scene" id="s5">
+  <p>Do you want to open this letter? 💭</p>
+  <button onclick="cry()">No 😔</button>
+  <button onclick="openLetter()">Yes ❤️</button>
+  <div id="react" style="font-size:40px;"></div>
+</div>
+
+<!-- SCENE 6 : LETTER PART 1 -->
+<div class="scene" id="s6">
+  <div class="letter">
+    <div class="top">✨ 12 DAYS LEFT ✨</div>
+    <h2>Advance Happy Birthday 🎂</h2>
+    <h3>Ashu Janu 💖</h3>
+    <h4>Meri Rahat-e-Jaan, Mera Sakoon-e-Qalb 🤍</h4>
+
+    <p>
+      Tumhare hone se main mukammal ho jata hoon…<br>
+      aur jab tum door hoti ho, to jaise kuch adhoora reh jata hai 💔<br><br>
+
+      Tumhari ek jhalak mere dil ko sakoon de deti hai,<br>
+      aur tumhein dekhe baghair mera dil bechain rehta hai 🫀<br><br>
+
+      Tum muskurati ho to lagta hai waqt tham sa gaya ho,<br>
+      aur jab udaas hoti ho, to meri duniya bhi khamosh ho jati hai 🌧️
+    </p>
+  </div>
+  <button onclick="next(7)">Read more ❤️</button>
+</div>
+
+<!-- SCENE 7 : LETTER PART 2 -->
+<div class="scene" id="s7">
+  <div class="letter">
+    <p>
+      Tum ho to har din khoobsurat lagta hai,<br>
+      tum na ho to har pal intezar ban jata hai ⏳<br><br>
+
+      Tum meri rahat bhi ho aur meri aadat bhi,<br>
+      tumhari zaroorat mujhe har saans ke saath mehsoos hoti hai 🤍<br><br>
+
+      Tum meri kahani ka sabse khoobsurat hissa ho,<br>
+      aur meri har kahani tum se hi shuru hoti hai 📖<br><br>
+
+      Tum ho to main hoon,<br>
+      tum na ho to main sirf ek khali sa ehsaas hoon…
+    </p>
+
+    <h3>Happy Birthday meri pyari Ashu Janu 🎉💖</h3>
+  </div>
 </div>
 
 <script>
-/* AUTO MOVE FROM SCENE 1 */
-setTimeout(()=>{
-  document.getElementById("scene1").classList.remove("active");
-  document.getElementById("scene2").classList.add("active");
-},5500);
+const scenes=document.querySelectorAll('.scene');
+function next(n){
+  scenes.forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+}
 
-/* DOOR OPEN */
+/* AUTO */
+setTimeout(()=>next(2),6500);
+
+/* DOOR */
 function openDoor(){
   document.getElementById("door").classList.add("open");
-  setTimeout(()=>{
-    document.getElementById("scene2").classList.remove("active");
-    document.getElementById("scene3").classList.add("active");
-  },1000);
+  setTimeout(()=>next(3),900);
 }
+
+/* REACTIONS */
+function cry(){
+  document.getElementById("react").innerHTML="😢";
+}
+function openLetter(){
+  document.getElementById("react").innerHTML="😊";
+  setTimeout(()=>{
+    next(6);
+    roses(); hearts();
+  },800);
+}
+
+/* EFFECTS */
+function roses(){
+  for(let i=0;i<20;i++){
+    let r=document.createElement('div');
+    r.className='rose';
+    r.innerText='🌹';
+    r.style.left=Math.random()*100+'%';
+    r.style.animationDuration=4+Math.random()*3+'s';
+    document.body.appendChild(r);
+  }
+}
+function hearts(){
+  for(let i=0;i<15;i++){
+    let h=document.createElement('div');
+    h.className='heart';
+    h.innerText='❤️';
+    h.style.left=Math.random()*100+'%';
+    h.style.animationDuration=3+Math.random()*3+'s';
+    document.body.appendChild(h);
+  }
+}
+
+/* SIGN */
+const canvas=document.getElementById("sign");
+const ctx=canvas.getContext("2d");
+let draw=false;
+canvas.onmousedown=()=>draw=true;
+canvas.onmouseup=()=>draw=false;
+canvas.onmousemove=e=>{
+  if(!draw) return;
+  ctx.fillStyle="#c9184a";
+  ctx.beginPath();
+  ctx.arc(e.offsetX,e.offsetY,2,0,Math.PI*2);
+  ctx.fill();
+};
+canvas.addEventListener("touchmove",e=>{
+  e.preventDefault();
+  let r=canvas.getBoundingClientRect();
+  ctx.beginPath();
+  ctx.arc(e.touches[0].clientX-r.left,e.touches[0].clientY-r.top,2,0,Math.PI*2);
+  ctx.fill();
+});
 </script>
 
 </body>
