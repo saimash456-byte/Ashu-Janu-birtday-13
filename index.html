@@ -3,208 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For My Pyari Ashu Janu ❤️</title>
+<title>A Letter For Ashu 💌</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-  font-family: 'Arial', sans-serif;
-  background: radial-gradient(circle at top,#ff9a9e,#fad0c4);
-  color:#fff;
-  text-align:center;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(#0f2027,#203a43,#2c5364);
   overflow:hidden;
+  color:white;
 }
 
-.slide{
+/* SCENES */
+.scene{
+  position:absolute;
+  width:100%;
+  height:100vh;
   display:none;
-  min-height:100vh;
-  padding:40px 20px;
   justify-content:center;
   align-items:center;
   flex-direction:column;
 }
+.active{display:flex;}
 
-.slide.active{display:flex;}
+/* HOUSE */
+.house{
+  font-size:120px;
+  margin-bottom:10px;
+}
 
-h1,h2,p{margin:15px 0;}
+/* DOOR */
+.door{
+  font-size:90px;
+  cursor:pointer;
+  transition:transform 1s;
+}
+.open{
+  transform:rotateY(-60deg);
+}
 
-.tap{
-  margin-top:30px;
+/* POSTMAN */
+.postman{
+  font-size:70px;
+  position:absolute;
+  left:-100px;
+  bottom:20%;
+  animation:drive 5s forwards;
+}
+@keyframes drive{
+  to{left:40%;}
+}
+
+/* ENVELOPE */
+.envelope{
+  font-size:60px;
+  margin-top:20px;
+  animation:float 2s infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+/* TEXT */
+.text{
+  margin-top:15px;
+  font-size:20px;
+  opacity:0.9;
+}
+
+/* BUTTON */
+button{
+  margin-top:20px;
   padding:12px 28px;
-  background:#fff;
-  color:#ff4d6d;
+  border:none;
   border-radius:30px;
+  background:#fff;
+  color:#c9184a;
   font-size:18px;
   cursor:pointer;
-}
-
-.heart{
-  font-size:90px;
-  animation:pulse 1.5s infinite;
-  cursor:pointer;
-}
-
-@keyframes pulse{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.3);}
-}
-
-.fade{
-  animation:fade 2s;
-}
-@keyframes fade{
-  from{opacity:0;}
-  to{opacity:1;}
-}
-
-.big{
-  font-size:90px;
-  font-weight:bold;
-  animation:pulse 1.5s infinite;
-}
-
-.rose, .balloon{
-  position:absolute;
-  animation:float linear infinite;
-  font-size:30px;
-}
-
-@keyframes float{
-  to{transform:translateY(-120vh);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 MUSIC -->
-<audio id="bgm" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7cbbefb3a5.mp3" type="audio/mpeg">
-</audio>
-
-<!-- SLIDE 1 -->
-<div class="slide active fade">
-  <div class="heart" onclick="start()">❤️</div>
-  <p>Before your birthday… 🌸<br>Tap the heart</p>
+<!-- SCENE 1 : POSTMAN ARRIVES -->
+<div class="scene active" id="scene1">
+  <div class="house">🏠</div>
+  <div class="postman">🚗📮</div>
+  <div class="text">Someone is coming…</div>
 </div>
 
-<!-- SLIDE 2 (AUTO) -->
-<div class="slide">
-  <h2>Do you know…</h2>
-  <p>someone thinks of you every day? 🥺</p>
+<!-- SCENE 2 : DOOR KNOCK -->
+<div class="scene" id="scene2">
+  <div class="house">🏠</div>
+  <div class="door" id="door">🚪</div>
+  <div class="text">Knock… Knock…</div>
+  <button onclick="openDoor()">Open Door</button>
 </div>
 
-<!-- SLIDE 3 (AUTO) -->
-<div class="slide">
-  <p class="fade">It’s me…<br>and my heart chooses you ❤️</p>
-  <p><b>meri pyari Ashu Janu</b></p>
-</div>
-
-<!-- SLIDE 4 -->
-<div class="slide">
-  <div class="big">13</div>
-  <p>days left…<br>not days actually, emotions.</p>
-  <div class="tap" onclick="next()">Tap ❤️</div>
-</div>
-
-<!-- SLIDE 5 (AUTO) -->
-<div class="slide">
-  <p>In these days,<br>your smile keeps visiting my thoughts 🌹</p>
-</div>
-
-<!-- SLIDE 6 -->
-<div class="slide">
-  <p>We’re getting closer…<br>slowly, beautifully 🎈</p>
-  <div class="tap" onclick="next()">Next</div>
-</div>
-
-<!-- SLIDE 7 (AUTO) -->
-<div class="slide">
-  <h2>Because someone precious was born… 👑</h2>
-  <h1>Ashu</h1>
-</div>
-
-<!-- SLIDE 8 (AUTO) -->
-<div class="slide">
-  <p>Not today…<br>but very soon 🎂</p>
-</div>
-
-<!-- SLIDE 9 -->
-<div class="slide">
-  <p>
-    Every day brings me closer to Ashu’s smile 💕<br>
-    Counting 13 days for her special day ✨
-  </p>
-  <div class="tap" onclick="next()">Next</div>
-</div>
-
-<!-- SLIDE 10 (AUTO) -->
-<div class="slide">
-  <h2>I promise…</h2>
-  <p>I’ll always celebrate you 🌈</p>
-</div>
-
-<!-- FINAL SLIDE -->
-<div class="slide">
-  <h1>Advance Happy Birthday 🎉</h1>
-  <h2>Meri Sakoon-e-Qalb 💖</h2>
-  <p>meri pyari Ashu Janu</p>
+<!-- SCENE 3 : LETTER HANDOVER -->
+<div class="scene" id="scene3">
+  <div class="house">🏠</div>
+  <div class="envelope">💌</div>
+  <div class="text">
+    This letter is only for you…<br>
+    From someone who waits every day 💖
+  </div>
+  <button onclick="alert('Next phase: Sign & Letter opening 💕')">
+    Take the letter
+  </button>
 </div>
 
 <script>
-let slides=document.querySelectorAll('.slide');
-let index=0;
-let musicStarted=false;
+/* AUTO MOVE FROM SCENE 1 */
+setTimeout(()=>{
+  document.getElementById("scene1").classList.remove("active");
+  document.getElementById("scene2").classList.add("active");
+},5500);
 
-function start(){
-  document.getElementById('bgm').play();
-  musicStarted=true;
-  next();
-}
-
-function next(){
-  slides[index].classList.remove('active');
-  index++;
-  if(index<slides.length){
-    slides[index].classList.add('active');
-    auto();
-    effects();
-  }
-}
-
-function auto(){
-  if([1,2,4,6,7,9].includes(index)){
-    setTimeout(next,3000);
-  }
-}
-
-function effects(){
-  if(index===4){roses();}
-  if(index===5 || index===9){balloons();}
-}
-
-function roses(){
-  for(let i=0;i<15;i++){
-    let r=document.createElement('div');
-    r.innerText="🌹";
-    r.className="rose";
-    r.style.left=Math.random()*100+"%";
-    r.style.bottom="-40px";
-    r.style.animationDuration=4+Math.random()*3+"s";
-    document.body.appendChild(r);
-  }
-}
-
-function balloons(){
-  for(let i=0;i<20;i++){
-    let b=document.createElement('div');
-    b.innerText="🎈";
-    b.className="balloon";
-    b.style.left=Math.random()*100+"%";
-    b.style.bottom="-60px";
-    b.style.animationDuration=5+Math.random()*4+"s";
-    document.body.appendChild(b);
-  }
+/* DOOR OPEN */
+function openDoor(){
+  document.getElementById("door").classList.add("open");
+  setTimeout(()=>{
+    document.getElementById("scene2").classList.remove("active");
+    document.getElementById("scene3").classList.add("active");
+  },1000);
 }
 </script>
 
